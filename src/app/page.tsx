@@ -2,7 +2,6 @@ import {
   ArrowRightIcon,
   BugIcon,
   CrosshairIcon,
-  DownloadIcon,
   MailIcon,
   RadarIcon,
 } from "lucide-react";
@@ -13,6 +12,7 @@ import CompanyLogo from "@/components/company-logo";
 import ConsoleBanner from "@/components/console-banner";
 import InteractiveMotion from "@/components/interactive-motion";
 import Navigation from "@/components/navigation";
+import ResumeDownloadForm from "@/components/resume-download-form";
 import Reveal from "@/components/reveal";
 import Socials from "@/components/socials";
 import ThemeSwitcher from "@/components/theme-switcher";
@@ -77,16 +77,7 @@ export default function Home() {
             </div>
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
               <InteractiveMotion className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto" asChild>
-                  <Link
-                    href="https://docs.google.com/document/d/1jtaCuy1BtGAulHfWWZGrK1CmZZNyTcsM90C-WDt4v4o/export?format=pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <DownloadIcon />
-                    Download Resume
-                  </Link>
-                </Button>
+                <ResumeDownloadForm />
               </InteractiveMotion>
               <InteractiveMotion className="w-full sm:w-auto">
                 <Button className="w-full sm:w-auto" variant="outline" asChild>

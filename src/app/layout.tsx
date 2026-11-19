@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import TabTitle from "@/components/tab-title";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
 const jetbrainsMonoHeading = JetBrains_Mono({
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <Analytics />
         <SpeedInsights />
+        <Toaster position="bottom-right" richColors />
       </body>
     </html>
   );
