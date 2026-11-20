@@ -92,12 +92,12 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.05}>
           <section
-            id="about-me"
+            id="whoami"
             className="flex w-full flex-col items-stretch gap-4 sm:w-auto sm:items-start"
           >
             <div className="flex flex-col items-start gap-4">
-              <Link href="#about-me">
-                <H2 className="underline underline-offset-4">About Me</H2>
+              <Link href="#whoami">
+                <H2 className="underline underline-offset-4">Who Am I</H2>
               </Link>
               <div className="flex flex-col gap-1 items-start">
                 <P>I break systems legally for a living.</P>
