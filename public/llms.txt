@@ -1,0 +1,20 @@
+# Andrew Virya Victorio
+
+> Offensive Security Practitioner.
+
+## Overview
+Andrew Virya Victorio is a web application security and penetration testing practitioner based in Indonesia, with hands-on background in data and infrastructure engineering. This site showcases red-team/offensive security perspective and access to the portfolio deck and scheduling.
+
+## Core Focus
+- Web Application Security & Penetration Testing
+- Vulnerability Research & Exploitation Analysis
+- Offensive & Developer Tooling (Rust, Python, TypeScript/Next.js)
+- Infrastructure & Telemetry Context (SIEM, Zero-Trust mesh, data platforms)
+
+## Links
+- Portfolio Home: andrewvirya.me
+- GitHub: https://github.com/dedgh0st
+- linkedin: https://linkedin.com/in/andrew-virya-victorio
+- gravatar: https://gravatar.com/andrewvirya
+- instagram: https://instagram.com/avv_210
+- X: https://x.com/avv_210
