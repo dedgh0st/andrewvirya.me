@@ -66,17 +66,17 @@ export default function PasswordToolsShell() {
                   <TabsList
                     variant="line"
                     aria-label="Password tools"
-                    className="mb-6 grid h-auto w-full grid-cols-2 justify-stretch rounded-none border-b border-border p-0"
+                    className="mb-6 grid h-auto w-full grid-cols-2 justify-stretch rounded-none p-0"
                   >
                     <TabsTrigger
                       value="check"
-                      className="h-auto justify-start rounded-none border-b-2 border-transparent px-3 py-3 text-left text-xs text-muted-foreground after:hidden hover:text-foreground data-[state=active]:border-red-500 data-[state=active]:text-foreground dark:data-[state=active]:border-red-500 dark:data-[state=active]:bg-transparent"
+                      className="h-auto justify-start rounded-none border-b-2 border-transparent px-3 py-3 text-left text-xs text-muted-foreground after:hidden hover:text-foreground focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 data-[state=active]:border-b-red-500 data-[state=active]:text-foreground dark:data-[state=active]:bg-transparent"
                     >
                       <span className="text-red-400">01</span>Pass Check
                     </TabsTrigger>
                     <TabsTrigger
                       value="generate"
-                      className="h-auto justify-start rounded-none border-b-2 border-transparent px-3 py-3 text-left text-xs text-muted-foreground after:hidden hover:text-foreground data-[state=active]:border-red-500 data-[state=active]:text-foreground dark:data-[state=active]:border-red-500 dark:data-[state=active]:bg-transparent"
+                      className="h-auto justify-start rounded-none border-b-2 border-transparent px-3 py-3 text-left text-xs text-muted-foreground after:hidden hover:text-foreground focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 data-[state=active]:border-b-red-500 data-[state=active]:text-foreground dark:data-[state=active]:bg-transparent"
                     >
                       <span className="text-red-400">02</span>Pass Gen
                     </TabsTrigger>
