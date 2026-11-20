@@ -2,6 +2,7 @@ import {
   ArrowRightIcon,
   BugIcon,
   CrosshairIcon,
+  KeyRoundIcon,
   MailIcon,
   RadarIcon,
 } from "lucide-react";
@@ -20,6 +21,7 @@ import { H1, H2, P } from "@/components/typography";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   HoverCard,
   HoverCardContent,
@@ -169,6 +171,47 @@ export default function Home() {
                 </InteractiveMotion>
               ))}
             </div>
+          </section>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <section
+            id="tools"
+            className="flex w-full flex-col items-start gap-4 sm:w-auto"
+          >
+            <Link href="#tools">
+              <H2 className="underline underline-offset-4">Tools</H2>
+            </Link>
+            <ul className="w-full">
+              <li>
+                <Card className="border-border bg-card py-0 shadow-none ring-1 ring-foreground/10">
+                  <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="space-y-2">
+                      <Link
+                        href="/password-tools"
+                        className="inline-flex items-center gap-2 font-heading text-sm font-semibold underline underline-offset-4 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                      >
+                        <KeyRoundIcon aria-hidden="true" className="size-4" />
+                        Password Tools
+                      </Link>
+                      <P className="text-muted-foreground">
+                        Check passwords against known breaches and generate
+                        strong passwords locally.
+                      </P>
+                    </div>
+                    <Button
+                      variant="outline"
+                      className="w-full sm:w-auto"
+                      asChild
+                    >
+                      <Link href="/password-tools">
+                        Open tool
+                        <ArrowRightIcon aria-hidden="true" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </li>
+            </ul>
           </section>
         </Reveal>
         <Reveal delay={0.05}>
