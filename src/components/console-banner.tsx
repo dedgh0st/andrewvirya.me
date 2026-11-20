@@ -40,7 +40,11 @@ export default function ConsoleBanner() {
     );
     console.log(
       "%cKein System ist sicher 🃏",
-      "color: #888888; font-style: italic;",
+      "color: #ff4444; font-style: italic;",
+    );
+    console.log(
+      "%cLooking under the hood? Check /robots.txt or reach out via Cal.com.",
+      "color: #ff4444;",
     );
   }, []);
 
