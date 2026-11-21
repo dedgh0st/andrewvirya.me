@@ -103,7 +103,13 @@ export default function Home() {
               </Link>
               <div className="flex flex-col gap-1 items-start">
                 <P>I break systems legally for a living.</P>
-                <P>Solving CTF challenges in my free time.</P>
+                <P>
+                  An offensive security practitioner with a defensive mindset.
+                </P>
+                <P>
+                  Outside of work, I sharpen my skills through CTF challenges,
+                  security research, and professional certifications.
+                </P>
               </div>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="outline">
@@ -241,6 +247,11 @@ export default function Home() {
               >
                 TikTok.
               </Link>
+            </P>
+            <P>
+              Another channel I had including my{" "}
+              <Link href="https://www.youtube.com/@d3dgh0st">YouTube</Link>{" "}
+              channel
             </P>
           </section>
         </Reveal>
