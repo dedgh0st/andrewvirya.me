@@ -19,7 +19,7 @@ export default function PasswordToolsShell() {
   };
 
   return (
-    <div className="flex min-h-svh flex-col bg-background font-mono text-foreground">
+    <div className="flex min-h-svh flex-col bg-gradient-to-br from-red-500/5 via-background to-rose-500/10 font-mono text-foreground">
       <header className="flex w-full flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-8 sm:py-4">
         <Button
           variant="ghost"
@@ -127,14 +127,13 @@ export default function PasswordToolsShell() {
               browser.
             </p>
             <p>
-              A breach check runs only after you submit. Your browser computes
-              a SHA-1 hash and sends only its first 5 uppercase hexadecimal
+              A breach check runs only after you submit. Your browser computes a
+              SHA-1 hash and sends only its first 5 uppercase hexadecimal
               characters to{" "}
               <code>https://api.pwnedpasswords.com/range/{"{PREFIX}"}</code>{" "}
-              with the{" "}
-              <code>Add-Padding: true</code> header. HIBP Pwned Passwords v3
-              returns matching suffixes for local comparison; the full hash is
-              never sent. See the{" "}
+              with the <code>Add-Padding: true</code> header. HIBP Pwned
+              Passwords v3 returns matching suffixes for local comparison; the
+              full hash is never sent. See the{" "}
               <a
                 href="https://haveibeenpwned.com/API/v3#PwnedPasswords"
                 target="_blank"
@@ -151,8 +150,8 @@ export default function PasswordToolsShell() {
             </p>
             <p>
               A clean result only means HIBP returned no match. It cannot
-              guarantee that a password is safe or has never been exposed.
-              Use unique passwords and a trusted password manager.
+              guarantee that a password is safe or has never been exposed. Use
+              unique passwords and a trusted password manager.
             </p>
           </div>
         </details>

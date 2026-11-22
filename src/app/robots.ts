@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/redteam-only", "/.env.backup"],
+      disallow: ["/redteam-only", "/.env.backup", "/schedule-with-me"],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };
