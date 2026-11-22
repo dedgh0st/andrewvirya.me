@@ -157,8 +157,13 @@ export default function AboutPage() {
             certification journey; the certificates I have listed are available
             on my homepage.
           </P>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="outline" size="sm" asChild>
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <Button
+              className="w-full sm:w-auto"
+              variant="outline"
+              size="sm"
+              asChild
+            >
               <Link
                 href="https://medium.com/@dedgh0st"
                 target="_blank"
@@ -169,7 +174,12 @@ export default function AboutPage() {
                 <ExternalLinkIcon aria-hidden="true" />
               </Link>
             </Button>
-            <Button variant="outline" size="sm" asChild>
+            <Button
+              className="w-full sm:w-auto"
+              variant="outline"
+              size="sm"
+              asChild
+            >
               <Link href="/#certifications">
                 View listed certifications
                 <ArrowRightIcon aria-hidden="true" />
@@ -187,9 +197,15 @@ export default function AboutPage() {
               Find me around the web
             </h2>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             {professionalLinks.map(({ label, href }) => (
-              <Button key={label} variant="outline" size="sm" asChild>
+              <Button
+                key={label}
+                className="w-full sm:w-auto"
+                variant="outline"
+                size="sm"
+                asChild
+              >
                 <Link href={href} target="_blank" rel="noopener noreferrer">
                   {label}
                   <ExternalLinkIcon aria-hidden="true" />
@@ -197,7 +213,7 @@ export default function AboutPage() {
               </Button>
             ))}
           </div>
-          <Button size="sm" asChild>
+          <Button className="w-full sm:w-auto" size="sm" asChild>
             <Link href="mailto:avv03@protonmail.com">
               <MailIcon aria-hidden="true" />
               Get in touch

@@ -77,10 +77,10 @@ export default function Home() {
                 Offensive Security Researcher | Penetration Tester | CTF Player
               </P>
             </div>
-            <div className="flex w-full gap-2 sm:w-auto">
-              <InteractiveMotion className="min-w-0 flex-1 sm:w-auto sm:flex-none">
+            <div className="flex w-full flex-col gap-2">
+              <InteractiveMotion className="w-full">
                 <Button
-                  className="w-full sm:w-auto"
+                  className="w-full"
                   variant="outline"
                   data-cal-namespace="quick-call"
                   data-cal-link="avv210/quick-call"
@@ -90,7 +90,7 @@ export default function Home() {
                   Have a Quick Call
                 </Button>
               </InteractiveMotion>
-              <InteractiveMotion className="min-w-0 flex-1 sm:w-auto sm:flex-none">
+              <InteractiveMotion className="w-full">
                 <ResumeDownloadForm />
               </InteractiveMotion>
             </div>
@@ -279,7 +279,7 @@ export default function Home() {
             <Link href="#socials">
               <H2 className="underline underline-offset-4">Socials</H2>
             </Link>
-            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto">
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
               {SOCIALS.map((social) => (
                 <Socials
                   key={social.name}
