@@ -8,6 +8,9 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       disallow: ["/redteam-only", "/.env.backup", "/schedule-with-me"],
+      other: {
+        "Content-Signal": "ai-train=no, search=yes, ai-input=yes",
+      },
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };
