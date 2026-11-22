@@ -219,7 +219,7 @@ export default function ResumeDownloadForm() {
               autoComplete="off"
               tabIndex={-1}
               aria-hidden="true"
-              className="absolute -left-[10000px] h-px w-px overflow-hidden"
+              className="absolute left-[-10000px] h-px w-px overflow-hidden"
             />
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? (
