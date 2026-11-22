@@ -400,10 +400,10 @@ export default function PassGenTab() {
           value={Math.min((entropy / 80) * 100, 100)}
           className={`bg-muted ${
             strength.label === "Weak"
-              ? "[&_[data-slot=progress-indicator]]:bg-red-500"
+              ? "**:data-[slot=progress-indicator]:bg-red-500"
               : strength.label === "Fair"
-                ? "[&_[data-slot=progress-indicator]]:bg-amber-400"
-                : "[&_[data-slot=progress-indicator]]:bg-emerald-400"
+                ? "**:data-[slot=progress-indicator]:bg-amber-400"
+                : "**:data-[slot=progress-indicator]:bg-emerald-400"
           }`}
         />
       </div>

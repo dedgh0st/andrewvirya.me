@@ -25,18 +25,26 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const RESUME_URL =
-  "https://docs.google.com/document/d/1jtaCuy1BtGAulHfWWZGrK1CmZZNyTcsM90C-WDt4v4o/export?format=pdf";
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
 const resumeFormSchema = z.object({
-  name: z.string().trim().min(3, "Name must be at least 3 characters."),
-  email: z.email("Enter a valid email address."),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Name must be at least 2 characters.")
+    .max(100, "Name must be 100 characters or fewer."),
+  email: z.email("Enter a valid email address.").trim(),
+  botcheck: z.string(),
 });
 
 const web3FormsResponseSchema = z.object({
   success: z.boolean(),
   message: z.string().optional(),
+});
+
+const accessResponseSchema = z.object({
+  success: z.boolean().optional(),
+  error: z.string().optional(),
 });
 
 type ResumeFormValues = z.infer<typeof resumeFormSchema>;
@@ -51,50 +59,81 @@ export default function ResumeDownloadForm() {
     defaultValues: {
       name: "",
       email: "",
+      botcheck: "",
     },
   });
 
   async function onSubmit(values: ResumeFormValues) {
     setIsSubmitting(true);
+    let accessSent = false;
 
     try {
+      const accessResponse = await fetch("/api/request-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const accessResult = accessResponseSchema.safeParse(
+        await accessResponse.json(),
+      );
+
+      if (
+        !accessResponse.ok ||
+        !accessResult.success ||
+        accessResult.data.success !== true
+      ) {
+        toast.error(
+          accessResponse.status === 429
+            ? "Too many requests. Please wait 15 minutes before trying again."
+            : accessResult.success
+              ? (accessResult.data.error ??
+                "Could not send your access links. Please try again.")
+              : "Could not send your access links. Please try again.",
+        );
+        return;
+      }
+
+      accessSent = true;
       const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
       if (!accessKey) {
-        throw new Error("Missing NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY.");
+        throw new Error(
+          "Your access links were sent, but the separate site notification could not be sent.",
+        );
       }
 
       const body = new FormData();
       body.set("access_key", accessKey);
       body.set("name", values.name);
       body.set("email", values.email);
+      body.set("botcheck", values.botcheck);
 
       const response = await fetch(WEB3FORMS_URL, {
         method: "POST",
         body,
       });
       if (!response.ok) {
-        throw new Error(`Web3Forms returned status ${response.status}.`);
+        throw new Error("The separate site notification could not be sent.");
       }
 
       const result = web3FormsResponseSchema.parse(await response.json());
       if (!result.success) {
-        throw new Error(result.message ?? "Web3Forms rejected the submission.");
+        throw new Error("The separate site notification could not be sent.");
       }
-
-      const downloadLink = document.createElement("a");
-      downloadLink.href = RESUME_URL;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      downloadLink.remove();
 
       setIsOpen(false);
       form.reset();
       toast.success(
-        "Thanks, we received your details. Your resume is downloading.",
+        "Access links sent. Check your inbox or spam folder for the links; they expire in 24 hours.",
       );
     } catch (error: unknown) {
-      console.error("Could not submit the resume download form.", error);
-      toast.error("Failed to submit the form");
+      console.error("Could not complete the resume access request.");
+      toast.error(
+        accessSent
+          ? error instanceof Error
+            ? error.message
+            : "Your links were sent, but the separate site notification could not be sent."
+          : "Could not send your access links. Please try again later.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -105,15 +144,16 @@ export default function ResumeDownloadForm() {
       <DialogTrigger asChild>
         <Button className="w-full sm:w-auto">
           <DownloadIcon />
-          Download Resume
+          Request Access Links
         </Button>
       </DialogTrigger>
       <DialogContent>
         <div className="flex items-start justify-between gap-4">
           <div className="grid gap-2">
-            <DialogTitle>Download my resume</DialogTitle>
+            <DialogTitle>Get my portfolio and resume</DialogTitle>
             <DialogDescription>
-              Enter your name and email to continue to the resume PDF.
+              Enter your name and email and we'll email you expiring access
+              links.
             </DialogDescription>
           </div>
           <DialogClose asChild>
@@ -133,7 +173,7 @@ export default function ResumeDownloadForm() {
           <form
             noValidate
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid gap-4"
+            className="relative grid gap-4"
           >
             <FormField
               control={form.control}
@@ -172,9 +212,18 @@ export default function ResumeDownloadForm() {
                 </FormItem>
               )}
             />
+            <input
+              {...form.register("botcheck")}
+              type="text"
+              name="botcheck"
+              autoComplete="off"
+              tabIndex={-1}
+              aria-hidden="true"
+              className="absolute -left-[10000px] h-px w-px overflow-hidden"
+            />
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               <DownloadIcon aria-hidden="true" />
-              {isSubmitting ? "Submitting..." : "Download Resume"}
+              {isSubmitting ? "Sending links..." : "Email me access links"}
             </Button>
           </form>
         </Form>
