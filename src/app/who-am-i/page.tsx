@@ -1,11 +1,9 @@
 import {
   ArrowRightIcon,
   BookOpenTextIcon,
-  BugIcon,
   CrosshairIcon,
   ExternalLinkIcon,
   MailIcon,
-  RadarIcon,
   ShieldCheckIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -14,7 +12,6 @@ import { Fragment } from "react";
 import Navigation from "@/components/navigation";
 import ThemeSwitcher from "@/components/theme-switcher";
 import { H1, P } from "@/components/typography";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NAVIGATION } from "@/data/navigations";
@@ -36,19 +33,12 @@ const professionalLinks = [
   },
 ];
 
-const focusAreas = [
-  { label: "Web application security", icon: BugIcon },
-  { label: "Vulnerability assessment", icon: RadarIcon },
-  { label: "Penetration testing", icon: CrosshairIcon },
-  { label: "Red teaming", icon: ShieldCheckIcon },
-];
-
 export default function AboutPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gradient-to-br from-red-500/5 via-background to-rose-500/10 font-sans">
+    <div className="flex min-h-screen flex-col items-center bg-linear-to-br from-red-500/5 via-background to-rose-500/10 font-sans">
       <Link
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-ring"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-foreground focus:outline focus:outline-offset-2 focus:outline-ring"
       >
         Skip to content
       </Link>
@@ -91,18 +81,6 @@ export default function AboutPage() {
             to understand how a system can be tested, and what makes it stronger
             afterward.
           </P>
-          <div className="flex flex-wrap gap-2">
-            {focusAreas.map(({ label, icon: Icon }) => (
-              <Badge
-                key={label}
-                variant="outline"
-                className="gap-1.5 px-2.5 py-1"
-              >
-                <Icon aria-hidden="true" />
-                {label}
-              </Badge>
-            ))}
-          </div>
         </header>
 
         <section aria-labelledby="practice-heading" className="space-y-4">

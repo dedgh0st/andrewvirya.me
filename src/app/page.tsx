@@ -37,7 +37,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-red-500/5 via-background to-rose-500/10 font-sans">
       <Link
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-ring"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-foreground focus:outline focus:outline-offset-2 focus:outline-ring"
       >
         Skip to content
       </Link>
