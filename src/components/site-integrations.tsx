@@ -25,7 +25,6 @@ export default function SiteIntegrations() {
 Cal("init", "quick-call", { origin: "https://app.cal.com" });
 Cal.config = Cal.config || {};
 Cal.config.forwardQueryParams = true;
-Cal.ns["quick-call"]("floatingButton", { calLink: "avv210/quick-call", config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" } });
 Cal.ns["quick-call"]("ui", { hideEventTypeDetails: false, layout: "month_view" });`}
       </Script>
       <SpeedInsights />

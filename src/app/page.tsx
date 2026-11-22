@@ -1,9 +1,9 @@
 import {
   ArrowRightIcon,
   BugIcon,
+  CalendarDaysIcon,
   CrosshairIcon,
   KeyRoundIcon,
-  MailIcon,
   RadarIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -34,7 +34,7 @@ import { SOCIALS } from "@/data/socials";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-red-500/5 via-background to-rose-500/10 font-sans">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-red-500/5 via-background to-rose-500/10 font-sans">
       <Link
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-ring"
@@ -77,17 +77,21 @@ export default function Home() {
                 Offensive Security Researcher | Penetration Tester | CTF Player
               </P>
             </div>
-            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
-              <InteractiveMotion className="w-full sm:w-auto">
-                <ResumeDownloadForm />
-              </InteractiveMotion>
-              <InteractiveMotion className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto" variant="outline" asChild>
-                  <Link href="mailto:avv03@protonmail.com">
-                    <MailIcon />
-                    Email
-                  </Link>
+            <div className="flex w-full gap-2 sm:w-auto">
+              <InteractiveMotion className="min-w-0 flex-1 sm:w-auto sm:flex-none">
+                <Button
+                  className="w-full sm:w-auto"
+                  variant="outline"
+                  data-cal-namespace="quick-call"
+                  data-cal-link="avv210/quick-call"
+                  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                >
+                  <CalendarDaysIcon aria-hidden="true" />
+                  Have a Quick Call
                 </Button>
+              </InteractiveMotion>
+              <InteractiveMotion className="min-w-0 flex-1 sm:w-auto sm:flex-none">
+                <ResumeDownloadForm />
               </InteractiveMotion>
             </div>
           </div>
@@ -129,7 +133,11 @@ export default function Home() {
             <div className="flex w-full flex-col items-stretch gap-4 sm:w-auto sm:flex-row sm:items-center sm:justify-center">
               <InteractiveMotion className="w-full sm:w-auto">
                 <Button className="w-full sm:w-auto" variant="outline" asChild>
-                  <Link href="/who-am-i" target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href="/who-am-i"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     More About Me
                     <ArrowRightIcon />
                   </Link>

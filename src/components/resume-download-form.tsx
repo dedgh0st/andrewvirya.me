@@ -144,7 +144,7 @@ export default function ResumeDownloadForm() {
       <DialogTrigger asChild>
         <Button className="w-full sm:w-auto">
           <DownloadIcon />
-          Request Access Links
+          Access My Resume
         </Button>
       </DialogTrigger>
       <DialogContent>

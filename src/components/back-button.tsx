@@ -7,7 +7,11 @@ export default function BackButton() {
   const router = useRouter();
 
   return (
-    <Button variant="outline" onClick={() => router.back()}>
+    <Button
+      className="w-full sm:w-auto"
+      variant="outline"
+      onClick={() => router.back()}
+    >
       Back
     </Button>
   );

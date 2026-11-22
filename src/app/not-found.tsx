@@ -11,8 +11,8 @@ export default function NotFound() {
           404 &#x2F;&#x2F; Page Not Found
         </H1>
         <P>The page you&apos;re looking for isn&apos;t here.</P>
-        <div className="flex flex-col justify-center gap-2 sm:flex-row">
-          <Button asChild>
+        <div className="flex w-full flex-col justify-center gap-2 sm:w-auto sm:flex-row">
+          <Button className="w-full sm:w-auto" asChild>
             <Link href="/">Home</Link>
           </Button>
           <BackButton />
