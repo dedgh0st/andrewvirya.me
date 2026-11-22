@@ -11,7 +11,8 @@ export default function SiteIntegrations() {
 
   if (
     pathname === "/password-tools" ||
-    pathname.startsWith("/password-tools/")
+    pathname.startsWith("/password-tools/") ||
+    (pathname.startsWith("/labs/") && pathname.endsWith("/demo"))
   ) {
     return null;
   }
