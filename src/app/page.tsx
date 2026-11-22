@@ -201,7 +201,8 @@ export default function Home() {
                       </Link>
                       <P className="text-muted-foreground">
                         Check passwords against known breaches and generate
-                        strong passwords locally.
+                        strong passwords locally. No credit card or personal
+                        information required.
                       </P>
                     </div>
                     <Button
