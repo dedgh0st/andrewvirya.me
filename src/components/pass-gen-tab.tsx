@@ -412,7 +412,7 @@ export default function PassGenTab() {
         <Label htmlFor="pass-gen-output" className="sr-only">
           Generated secret
         </Label>
-        <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] gap-2 sm:flex sm:items-stretch">
+        <div className="relative">
           <Input
             ref={inputRef}
             id="pass-gen-output"
@@ -420,47 +420,50 @@ export default function PassGenTab() {
             readOnly
             value={secret}
             placeholder="Generated secret appears here"
-            className="col-span-3 h-10 min-w-0 border-input bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-emerald-500 sm:col-span-1 sm:h-9 sm:flex-1"
+            className="h-10 w-full border-input bg-background py-2 pr-20 pl-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-emerald-500"
           />
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                aria-label="Clear generated secret"
-                onClick={clearSecret}
-                className="h-10 w-10 border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground sm:h-9 sm:w-9"
-              >
-                <XIcon aria-hidden="true" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Clear</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="button"
-                disabled={!secret}
-                size="icon"
-                onClick={copySecret}
-                aria-label="Copy generated secret"
-                className="h-10 w-10 bg-secondary text-secondary-foreground hover:bg-secondary/80 sm:h-9 sm:w-9"
-              >
-                <CopyIcon aria-hidden="true" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Copy</TooltipContent>
-          </Tooltip>
-          <Button
-            type="button"
-            onClick={generate}
-            className="h-10 w-full bg-red-600 px-3 text-white hover:bg-red-500 sm:h-9 sm:w-auto sm:px-4"
-          >
-            <SparklesIcon aria-hidden="true" />
-            Generate
-          </Button>
+          <div className="absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Clear generated secret"
+                  onClick={clearSecret}
+                  className="h-7 w-7 text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <XIcon aria-hidden="true" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Clear</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  disabled={!secret}
+                  variant="ghost"
+                  size="icon"
+                  onClick={copySecret}
+                  aria-label="Copy generated secret"
+                  className="h-7 w-7 text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <CopyIcon aria-hidden="true" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Copy</TooltipContent>
+            </Tooltip>
+          </div>
         </div>
+        <Button
+          type="button"
+          onClick={generate}
+          className="h-10 w-full bg-red-600 px-3 text-white hover:bg-red-500 sm:px-4"
+        >
+          <SparklesIcon aria-hidden="true" />
+          Generate
+        </Button>
       </div>
 
       <div className="min-h-5 text-xs" aria-live="polite">

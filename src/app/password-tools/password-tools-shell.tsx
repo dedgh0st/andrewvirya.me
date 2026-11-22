@@ -70,13 +70,13 @@ export default function PasswordToolsShell() {
                   >
                     <TabsTrigger
                       value="check"
-                      className="h-auto justify-start rounded-none border-b-2 border-transparent px-3 py-3 text-left text-xs text-muted-foreground after:hidden hover:text-foreground focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 data-active:border-b-red-500 data-active:text-foreground dark:data-active:bg-transparent"
+                      className="h-auto justify-start rounded-none px-3 py-3 text-left text-xs text-muted-foreground group-data-[variant=line]/tabs-list:data-active:after:bg-red-500 hover:text-foreground focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 data-active:text-foreground dark:data-active:bg-transparent"
                     >
                       <span className="text-red-400">01</span>Pass Check
                     </TabsTrigger>
                     <TabsTrigger
                       value="generate"
-                      className="h-auto justify-start rounded-none border-b-2 border-transparent px-3 py-3 text-left text-xs text-muted-foreground after:hidden hover:text-foreground focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 data-active:border-b-red-500 data-active:text-foreground dark:data-active:bg-transparent"
+                      className="h-auto justify-start rounded-none px-3 py-3 text-left text-xs text-muted-foreground group-data-[variant=line]/tabs-list:data-active:after:bg-red-500 hover:text-foreground focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 data-active:text-foreground dark:data-active:bg-transparent"
                     >
                       <span className="text-red-400">02</span>Pass Gen
                     </TabsTrigger>
@@ -111,7 +111,51 @@ export default function PasswordToolsShell() {
       </main>
 
       <footer className="border-t border-border px-4 py-4 text-center text-[10px] text-muted-foreground">
-        Local by design · Do not reuse compromised passwords
+        <p>Local by design · Do not reuse compromised passwords</p>
+        <details
+          id="privacy-notes"
+          className="mx-auto mt-3 max-w-2xl text-left"
+        >
+          <summary className="cursor-pointer text-center text-[11px] transition-colors hover:text-foreground">
+            Privacy &amp; security details
+          </summary>
+          <div className="mt-3 space-y-2 border-t border-border pt-3 leading-relaxed">
+            <p>
+              Plaintext passwords are processed only in your browser. This tool
+              does not send them to this site or persist them in browser
+              storage, cookies, or URLs. Generated secrets also remain in your
+              browser.
+            </p>
+            <p>
+              A breach check runs only after you submit. Your browser computes
+              a SHA-1 hash and sends only its first 5 uppercase hexadecimal
+              characters to{" "}
+              <code>https://api.pwnedpasswords.com/range/{"{PREFIX}"}</code>{" "}
+              with the{" "}
+              <code>Add-Padding: true</code> header. HIBP Pwned Passwords v3
+              returns matching suffixes for local comparison; the full hash is
+              never sent. See the{" "}
+              <a
+                href="https://haveibeenpwned.com/API/v3#PwnedPasswords"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-foreground"
+              >
+                HIBP specification
+              </a>
+              .
+            </p>
+            <p>
+              Vercel Analytics records aggregate page visits only. No password
+              values, hashes, or password-check events are sent to analytics.
+            </p>
+            <p>
+              A clean result only means HIBP returned no match. It cannot
+              guarantee that a password is safe or has never been exposed.
+              Use unique passwords and a trusted password manager.
+            </p>
+          </div>
+        </details>
       </footer>
     </div>
   );

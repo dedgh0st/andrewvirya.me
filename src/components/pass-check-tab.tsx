@@ -2,13 +2,13 @@
 
 import {
   CircleCheckIcon,
+  InfoIcon,
   ShieldAlertIcon,
-  ShieldCheckIcon,
   TriangleAlertIcon,
   XIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -153,41 +153,46 @@ export default function PassCheckTab() {
 
   return (
     <div className="space-y-5">
-      <Alert
-        role="note"
-        className="border-border bg-muted/50 text-foreground [&>svg]:text-emerald-700 dark:[&>svg]:text-emerald-400"
-      >
-        <ShieldCheckIcon aria-hidden="true" />
-        <AlertTitle className="text-emerald-700 dark:text-emerald-400">
-          Local-first check
-        </AlertTitle>
-        <AlertDescription className="text-foreground">
-          <p>
-            Plaintext passwords never leave this browser or persist in storage,
-            cookies, or URLs.
-          </p>
-          <p>
-            On submit, the browser computes SHA-1 and queries only the first 5
-            uppercase hex characters directly at
-            https://api.pwnedpasswords.com/range/ with{" "}
-            <code>Add-Padding: true</code> for HIBP Pwned Passwords v3
-            k-anonymity. No full hash is sent.
-          </p>
-          <p>
-            Vercel Analytics records aggregate page visits only. No password
-            values, hashes, or password-check events are sent to analytics.
-          </p>
-        </AlertDescription>
-      </Alert>
-
       <section aria-labelledby="breach-check-heading" className="space-y-3">
         <div>
-          <h2
-            id="breach-check-heading"
-            className="text-xs font-semibold uppercase tracking-wide text-foreground"
-          >
-            Breach check
-          </h2>
+          <div className="flex items-center gap-1">
+            <h2
+              id="breach-check-heading"
+              className="text-xs font-semibold uppercase tracking-wide text-foreground"
+            >
+              Breach check
+            </h2>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Privacy information"
+                  className="h-6 w-6 text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <InfoIcon aria-hidden="true" className="size-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-sm whitespace-normal text-left">
+                <div className="space-y-2">
+                  <p>
+                    Plaintext passwords stay in your browser and are not
+                    persisted in storage, cookies, or URLs.
+                  </p>
+                  <p>
+                    On submit, HIBP receives only the first 5 uppercase SHA-1
+                    hex characters with <code>Add-Padding: true</code>. No full
+                    hash is sent.
+                  </p>
+                  <p>
+                    Vercel Analytics records aggregate page visits only. No
+                    password values or check events are sent.
+                  </p>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
             Submit to check whether this password appears in known breaches.
             This result is separate from the password guidelines below.
@@ -198,7 +203,7 @@ export default function PassCheckTab() {
           <Label htmlFor="pass-check-input" className="sr-only">
             Password to check
           </Label>
-          <div className="grid grid-cols-2 gap-2 sm:flex sm:items-stretch">
+          <div className="relative">
             <Input
               ref={inputRef}
               id="pass-check-input"
@@ -215,31 +220,31 @@ export default function PassCheckTab() {
                 setResult(null);
               }}
               placeholder="Enter a password to check"
-              className={`col-span-2 h-10 min-w-0 border bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-red-500 focus-visible:ring-red-500 sm:col-span-1 sm:h-9 sm:flex-1 ${borderColor}`}
+              className={`h-10 w-full border bg-background py-2 pr-12 pl-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-red-500 focus-visible:ring-red-500 ${borderColor}`}
             />
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   type="button"
-                  variant="outline"
+                  variant="ghost"
                   size="icon"
                   aria-label="Clear password"
                   onClick={clearPassword}
-                  className="h-10 w-full border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground sm:h-9 sm:w-9"
+                  className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/2 text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
                   <XIcon aria-hidden="true" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Clear</TooltipContent>
             </Tooltip>
-            <Button
-              type="submit"
-              disabled={!password || isChecking}
-              className="h-10 w-full bg-red-600 px-4 text-white hover:bg-red-500 sm:h-9 sm:w-auto"
-            >
-              {isChecking ? "Checking..." : "Check"}
-            </Button>
           </div>
+          <Button
+            type="submit"
+            disabled={!password || isChecking}
+            className="h-10 w-full bg-red-600 px-4 text-white hover:bg-red-500"
+          >
+            {isChecking ? "Checking..." : "Check"}
+          </Button>
         </form>
 
         <div aria-live="polite" className="min-h-6 text-sm">
