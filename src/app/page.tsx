@@ -129,7 +129,7 @@ export default function Home() {
             <div className="flex w-full flex-col items-stretch gap-4 sm:w-auto sm:flex-row sm:items-center sm:justify-center">
               <InteractiveMotion className="w-full sm:w-auto">
                 <Button className="w-full sm:w-auto" variant="outline" asChild>
-                  <Link href="/about" target="_blank" rel="noopener noreferrer">
+                  <Link href="/who-am-i" target="_blank" rel="noopener noreferrer">
                     More About Me
                     <ArrowRightIcon />
                   </Link>
