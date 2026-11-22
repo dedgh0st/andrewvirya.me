@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import LabsHeader from "@/components/labs/labs-header";
-import { Button } from "@/components/ui/button";
 import { getLab, LABS } from "@/data/labs";
 
 type LabPageProps = {
@@ -82,12 +81,23 @@ async function LabBriefingContent({ params }: LabPageProps) {
           <ArrowLeftIcon aria-hidden="true" className="size-4" />
           Back to Labs
         </Link>
-        <Button asChild>
-          <Link href={demoHref}>
-            Access Lab
-            <ArrowRightIcon aria-hidden="true" />
-          </Link>
-        </Button>
+        <Link
+          href={demoHref}
+          className="group flex min-h-20 w-full items-center justify-between gap-6 border border-red-500/40 bg-background/80 px-5 py-4 text-left transition-colors hover:border-red-500 hover:bg-red-500/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500 sm:w-auto sm:min-w-64"
+        >
+          <span className="grid gap-1">
+            <span className="font-heading text-base font-semibold text-red-500">
+              Access Lab
+            </span>
+            <span className="text-sm text-muted-foreground">
+              Open the safe simulation
+            </span>
+          </span>
+          <ArrowRightIcon
+            aria-hidden="true"
+            className="size-5 shrink-0 text-red-500 motion-safe:transition-transform motion-safe:group-hover:translate-x-1"
+          />
+        </Link>
       </div>
 
       <header className="grid gap-3">
