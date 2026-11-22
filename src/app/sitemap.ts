@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { LABS } from "@/data/labs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://andrewvirya.me";
@@ -16,5 +17,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/labs`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...LABS.map((lab) => ({
+      url: `${baseUrl}/labs/${lab.vulnSlug}/${lab.labSlug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }

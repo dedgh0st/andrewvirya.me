@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeSwitcher from "@/components/theme-switcher";
 
 export default function LabsHeader() {
   return (
@@ -20,9 +21,12 @@ export default function LabsHeader() {
           # labs
         </Link>
       </nav>
-      <p className="font-mono text-xs text-muted-foreground">
-        Security Awareness &amp; PoC Labs
-      </p>
+      <div className="flex items-center gap-4">
+        <p className="hidden font-mono text-xs text-muted-foreground sm:block">
+          Security Awareness &amp; PoC Labs
+        </p>
+        <ThemeSwitcher />
+      </div>
     </header>
   );
 }

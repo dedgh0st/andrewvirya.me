@@ -50,43 +50,50 @@ export default function LabsPage() {
 
           <div className="grid gap-4">
             {LABS.map((lab) => (
-              <article
+              <Link
                 key={`${lab.vulnSlug}/${lab.labSlug}`}
-                className="grid gap-4 border border-border bg-background/70 p-5 sm:p-6"
+                href={`/labs/${lab.vulnSlug}/${lab.labSlug}`}
+                aria-labelledby={`lab-title-${lab.vulnSlug}-${lab.labSlug}`}
+                className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
               >
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="border border-red-500/40 px-2 py-1 font-mono text-xs text-red-500">
-                    {lab.vulnSlug}
-                  </span>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    {lab.category}
-                  </span>
-                </div>
-                <h2 className="font-heading text-xl font-semibold">
-                  {lab.title}
-                </h2>
-                <div className="grid gap-3 text-sm leading-6 sm:grid-cols-2 sm:gap-6">
-                  <div>
-                    <h3 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
-                      What is it
-                    </h3>
-                    <p className="mt-1">{lab.summary}</p>
+                <article className="grid gap-4 border border-border bg-background/70 p-5 transition-colors group-hover:border-red-500/60 group-hover:bg-background sm:p-6">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="border border-red-500/40 px-2 py-1 font-mono text-xs text-red-500">
+                      {lab.vulnSlug}
+                    </span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {lab.category}
+                    </span>
                   </div>
-                  <div>
-                    <h3 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
-                      How it works
-                    </h3>
-                    <p className="mt-1">{lab.howItWorks[0]}</p>
+                  <h2
+                    id={`lab-title-${lab.vulnSlug}-${lab.labSlug}`}
+                    className="font-heading text-xl font-semibold"
+                  >
+                    {lab.title}
+                  </h2>
+                  <div className="grid gap-3 text-sm leading-6 sm:grid-cols-2 sm:gap-6">
+                    <div>
+                      <h3 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
+                        What is it
+                      </h3>
+                      <p className="mt-1">{lab.summary}</p>
+                    </div>
+                    <div>
+                      <h3 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
+                        How it works
+                      </h3>
+                      <p className="mt-1">{lab.howItWorks[0]}</p>
+                    </div>
                   </div>
-                </div>
-                <Link
-                  href={`/labs/${lab.vulnSlug}/${lab.labSlug}`}
-                  className="inline-flex w-fit items-center gap-2 text-sm font-medium text-red-500 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
-                >
-                  Access Lab
-                  <ArrowRightIcon aria-hidden="true" className="size-4" />
-                </Link>
-              </article>
+                  <span className="inline-flex w-fit items-center gap-2 text-sm font-medium text-red-500 underline-offset-4 group-hover:underline">
+                    Access Lab
+                    <ArrowRightIcon
+                      aria-hidden="true"
+                      className="size-4 motion-safe:transition-transform motion-safe:group-hover:translate-x-1"
+                    />
+                  </span>
+                </article>
+              </Link>
             ))}
           </div>
         </section>

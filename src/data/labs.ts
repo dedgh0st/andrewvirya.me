@@ -6,6 +6,7 @@ export interface LabDefinition {
   summary: string;
   howItWorks: string[];
   mitigation: string[];
+  references: { title: string; url: string }[];
 }
 
 export const LABS = [
@@ -26,6 +27,17 @@ export const LABS = [
       "Use application control such as AppLocker or Windows Defender Application Control to restrict untrusted scripts.",
       "Apply appropriate PowerShell controls and endpoint attack-surface-reduction policies.",
       "Train users to report verification pages that ask them to run commands.",
+    ],
+    references: [
+      {
+        title: "Proofpoint: Clipboard Compromise — PowerShell Self-Pwn",
+        url: "https://www.proofpoint.com/us/blog/threat-insight/clipboard-compromise-powershell-self-pwn",
+      },
+      {
+        title:
+          "Aviatrix: ClickFix Campaign — Fake Cloudflare (macOS & Windows)",
+        url: "https://aviatrix.ai/threat-research-center/clickfix-campaign-fake-cloudflare-macos-windows-2026-33466/",
+      },
     ],
   },
 ] as const satisfies readonly LabDefinition[];

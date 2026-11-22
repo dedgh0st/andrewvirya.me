@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckIcon, XIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -8,9 +9,13 @@ const BENIGN_COMMAND = `powershell -NoProfile -Command "Start-Process 'https://w
 
 type ClickFixDemoProps = {
   briefingHref: string;
+  references: readonly { title: string; url: string }[];
 };
 
-export default function ClickFixDemo({ briefingHref }: ClickFixDemoProps) {
+export default function ClickFixDemo({
+  briefingHref,
+  references,
+}: ClickFixDemoProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [started, setStarted] = useState(false);
   const [clipboardStatus, setClipboardStatus] = useState<
@@ -88,13 +93,47 @@ export default function ClickFixDemo({ briefingHref }: ClickFixDemoProps) {
               )}
             </span>
             <span className="text-sm">Verify you are human</span>
-            <span className="ml-auto text-xs text-[#5f6368]">Simulation</span>
+            <span className="relative ml-auto h-6 w-24 shrink-0">
+              <Image
+                src="/cloudflare-logo.png"
+                alt="Cloudflare logo in this educational simulation"
+                fill
+                sizes="96px"
+                className="object-contain"
+              />
+            </span>
           </button>
           <p className="border-t border-[#e5e5e5] px-4 py-3 text-sm leading-6 text-[#5f6368]">
             Cloudflare needs to review the security of your connection before
             proceeding.
           </p>
         </div>
+
+        <section
+          aria-labelledby="research-references"
+          className="grid gap-3 border-t border-[#e5e5e5] pt-5"
+        >
+          <h2
+            id="research-references"
+            className="text-sm font-semibold text-[#3c4043]"
+          >
+            Research References
+          </h2>
+          <ul className="grid gap-2 text-sm">
+            {references.map((reference) => (
+              <li key={reference.url}>
+                <a
+                  href={reference.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#b45309] underline underline-offset-4 hover:text-[#7c2d12] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f38020]"
+                >
+                  {reference.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         {complete && (
           <output className="max-w-lg border border-[#188038]/30 bg-[#e6f4ea] px-4 py-3 text-sm text-[#137333]">
