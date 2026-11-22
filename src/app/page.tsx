@@ -250,7 +250,14 @@ export default function Home() {
             </P>
             <P>
               Another channel I had including my{" "}
-              <Link href="https://www.youtube.com/@d3dgh0st">YouTube</Link>{" "}
+              <Link
+                href="https://www.youtube.com/@d3dgh0st"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline underline-offset-4 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                YouTube
+              </Link>{" "}
               channel
             </P>
           </section>
