@@ -7,8 +7,15 @@ const requestSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.email().trim(),
   botcheck: z.unknown().optional(),
+  hCaptchaToken: z.string().min(1),
 });
 
+const web3FormsResponseSchema = z.object({
+  success: z.boolean(),
+  message: z.string().optional(),
+});
+
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 const RATE_LIMIT = 3;
 const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_CLEANUP_INTERVAL_MS = 60 * 1000;
@@ -76,7 +83,68 @@ export async function POST(request: Request) {
   const parsed = requestSchema.safeParse(body);
   if (!parsed.success) {
     return Response.json(
-      { error: "Enter a name between 2 and 100 characters and a valid email." },
+      {
+        error:
+          "Enter a name between 2 and 100 characters, a valid email, and complete the hCaptcha challenge.",
+      },
+      { status: 400 },
+    );
+  }
+
+  const web3FormsAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+  if (!web3FormsAccessKey) {
+    return Response.json(
+      { error: "hCaptcha verification is not configured." },
+      { status: 500 },
+    );
+  }
+
+  const web3FormsBody = new FormData();
+  web3FormsBody.set("access_key", web3FormsAccessKey);
+  web3FormsBody.set("name", parsed.data.name);
+  web3FormsBody.set("email", parsed.data.email);
+  web3FormsBody.set("botcheck", String(parsed.data.botcheck ?? ""));
+  web3FormsBody.set("h-captcha-response", parsed.data.hCaptchaToken);
+
+  let web3FormsResponse: Response;
+  try {
+    web3FormsResponse = await fetch(WEB3FORMS_URL, {
+      method: "POST",
+      body: web3FormsBody,
+    });
+  } catch {
+    console.error("Web3Forms could not verify the hCaptcha challenge.");
+    return Response.json(
+      { error: "Could not verify hCaptcha. Please try again." },
+      { status: 502 },
+    );
+  }
+
+  if (!web3FormsResponse.ok) {
+    console.error("Web3Forms could not verify the hCaptcha challenge.");
+    return Response.json(
+      { error: "Could not verify hCaptcha. Please try again." },
+      { status: 502 },
+    );
+  }
+
+  let web3FormsResult: unknown;
+  try {
+    web3FormsResult = await web3FormsResponse.json();
+  } catch {
+    console.error(
+      "Web3Forms returned an invalid hCaptcha verification response.",
+    );
+    return Response.json(
+      { error: "Could not verify hCaptcha. Please try again." },
+      { status: 502 },
+    );
+  }
+
+  const verification = web3FormsResponseSchema.safeParse(web3FormsResult);
+  if (!verification.success || !verification.data.success) {
+    return Response.json(
+      { error: "hCaptcha verification failed. Please complete the challenge." },
       { status: 400 },
     );
   }

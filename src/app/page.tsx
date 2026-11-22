@@ -77,10 +77,10 @@ export default function Home() {
                 Offensive Security Researcher | Penetration Tester | CTF Player
               </P>
             </div>
-            <div className="flex w-full flex-col gap-2">
-              <InteractiveMotion className="w-full">
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+              <InteractiveMotion className="w-full sm:w-auto">
                 <Button
-                  className="w-full"
+                  className="w-full sm:w-auto"
                   variant="outline"
                   data-cal-namespace="quick-call"
                   data-cal-link="avv210/quick-call"
@@ -90,7 +90,7 @@ export default function Home() {
                   Have a Quick Call
                 </Button>
               </InteractiveMotion>
-              <InteractiveMotion className="w-full">
+              <InteractiveMotion className="w-full sm:w-auto">
                 <ResumeDownloadForm />
               </InteractiveMotion>
             </div>
