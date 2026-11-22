@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DownloadIcon, XIcon } from "lucide-react";
+import { DownloadIcon, Loader2Icon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -222,7 +222,11 @@ export default function ResumeDownloadForm() {
               className="absolute -left-[10000px] h-px w-px overflow-hidden"
             />
             <Button type="submit" className="w-full" disabled={isSubmitting}>
-              <DownloadIcon aria-hidden="true" />
+              {isSubmitting ? (
+                <Loader2Icon className="animate-spin" aria-hidden="true" />
+              ) : (
+                <DownloadIcon aria-hidden="true" />
+              )}
               {isSubmitting ? "Sending links..." : "Email me access links"}
             </Button>
           </form>

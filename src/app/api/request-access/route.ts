@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { z } from "zod";
+import { buildAccessEmail } from "@/lib/access-email";
 import { createAccessToken } from "@/lib/access-token";
 
 const requestSchema = z.object({
@@ -114,6 +115,11 @@ export async function POST(request: Request) {
   const token = createAccessToken(cleanEmail, 24);
   deckLink.searchParams.set("token", token);
   cvLink.searchParams.set("token", token);
+  const emailContent = buildAccessEmail({
+    name: parsed.data.name.trim(),
+    deckUrl: deckLink.toString(),
+    resumeUrl: cvLink.toString(),
+  });
   const resend = new Resend(resendApiKey);
 
   try {
@@ -121,16 +127,8 @@ export async function POST(request: Request) {
       from: "Andrew Virya <noreply@andrewvirya.me>",
       to: cleanEmail,
       subject: "Your portfolio and resume access links",
-      text: [
-        `Hi ${parsed.data.name.trim()},`,
-        "",
-        "Here are your personal access links. They expire in 24 hours.",
-        "",
-        `Portfolio deck: ${deckLink.toString()}`,
-        `Resume: ${cvLink.toString()}`,
-        "",
-        "If you did not request these links, you can ignore this email.",
-      ].join("\n"),
+      html: emailContent.html,
+      text: emailContent.text,
     });
 
     if (error) {
