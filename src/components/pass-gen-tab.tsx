@@ -412,7 +412,7 @@ export default function PassGenTab() {
         <Label htmlFor="pass-gen-output" className="sr-only">
           Generated secret
         </Label>
-        <div className="flex flex-wrap items-stretch gap-2 sm:flex-nowrap">
+        <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] gap-2 sm:flex sm:items-stretch">
           <Input
             ref={inputRef}
             id="pass-gen-output"
@@ -420,7 +420,7 @@ export default function PassGenTab() {
             readOnly
             value={secret}
             placeholder="Generated secret appears here"
-            className="h-9 w-full min-w-0 flex-1 border-input bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-emerald-500 sm:w-auto"
+            className="col-span-3 h-10 min-w-0 border-input bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-emerald-500 sm:col-span-1 sm:h-9 sm:flex-1"
           />
           <Tooltip>
             <TooltipTrigger asChild>
@@ -430,26 +430,32 @@ export default function PassGenTab() {
                 size="icon"
                 aria-label="Clear generated secret"
                 onClick={clearSecret}
-                className="h-9 border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="h-10 w-10 border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground sm:h-9 sm:w-9"
               >
                 <XIcon aria-hidden="true" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>Clear</TooltipContent>
           </Tooltip>
-          <Button
-            type="button"
-            disabled={!secret}
-            onClick={copySecret}
-            className="h-9 bg-secondary px-3 text-secondary-foreground hover:bg-secondary/80"
-          >
-            <CopyIcon aria-hidden="true" />
-            Copy
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="button"
+                disabled={!secret}
+                size="icon"
+                onClick={copySecret}
+                aria-label="Copy generated secret"
+                className="h-10 w-10 bg-secondary text-secondary-foreground hover:bg-secondary/80 sm:h-9 sm:w-9"
+              >
+                <CopyIcon aria-hidden="true" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Copy</TooltipContent>
+          </Tooltip>
           <Button
             type="button"
             onClick={generate}
-            className="h-9 bg-red-600 px-4 text-white hover:bg-red-500"
+            className="h-10 w-full bg-red-600 px-3 text-white hover:bg-red-500 sm:h-9 sm:w-auto sm:px-4"
           >
             <SparklesIcon aria-hidden="true" />
             Generate

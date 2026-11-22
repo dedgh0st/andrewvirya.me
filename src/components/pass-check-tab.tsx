@@ -198,7 +198,7 @@ export default function PassCheckTab() {
           <Label htmlFor="pass-check-input" className="sr-only">
             Password to check
           </Label>
-          <div className="flex flex-wrap items-stretch gap-2 sm:flex-nowrap">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:items-stretch">
             <Input
               ref={inputRef}
               id="pass-check-input"
@@ -215,7 +215,7 @@ export default function PassCheckTab() {
                 setResult(null);
               }}
               placeholder="Enter a password to check"
-              className={`h-9 w-full min-w-0 flex-1 border bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-red-500 focus-visible:ring-red-500 sm:w-auto ${borderColor}`}
+              className={`col-span-2 h-10 min-w-0 border bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-red-500 focus-visible:ring-red-500 sm:col-span-1 sm:h-9 sm:flex-1 ${borderColor}`}
             />
             <Tooltip>
               <TooltipTrigger asChild>
@@ -225,7 +225,7 @@ export default function PassCheckTab() {
                   size="icon"
                   aria-label="Clear password"
                   onClick={clearPassword}
-                  className="h-9 border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
+                  className="h-10 w-full border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground sm:h-9 sm:w-9"
                 >
                   <XIcon aria-hidden="true" />
                 </Button>
@@ -235,7 +235,7 @@ export default function PassCheckTab() {
             <Button
               type="submit"
               disabled={!password || isChecking}
-              className="h-9 bg-red-600 px-4 text-white hover:bg-red-500"
+              className="h-10 w-full bg-red-600 px-4 text-white hover:bg-red-500 sm:h-9 sm:w-auto"
             >
               {isChecking ? "Checking..." : "Check"}
             </Button>
