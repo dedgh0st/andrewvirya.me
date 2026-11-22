@@ -71,7 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteIntegrations />
         {children}
         <Analytics />
-        <Toaster position="bottom-right" richColors />
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );
