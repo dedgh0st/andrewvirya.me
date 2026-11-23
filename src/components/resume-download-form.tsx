@@ -1,6 +1,5 @@
 "use client";
 
-import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DownloadIcon, Loader2Icon, XIcon } from "lucide-react";
 import { useState } from "react";
@@ -26,8 +25,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
-
 const resumeFormSchema = z.object({
   name: z
     .string()
@@ -36,7 +33,6 @@ const resumeFormSchema = z.object({
     .max(100, "Name must be 100 characters or fewer."),
   email: z.email("Enter a valid email address.").trim(),
   botcheck: z.string(),
-  hCaptchaToken: z.string().min(1, "Please complete the hCaptcha challenge."),
 });
 
 const accessResponseSchema = z.object({
@@ -49,7 +45,6 @@ type ResumeFormValues = z.infer<typeof resumeFormSchema>;
 export default function ResumeDownloadForm() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaVersion, setCaptchaVersion] = useState(0);
   const form = useForm<ResumeFormValues>({
     resolver: zodResolver(resumeFormSchema),
     mode: "all",
@@ -58,7 +53,6 @@ export default function ResumeDownloadForm() {
       name: "",
       email: "",
       botcheck: "",
-      hCaptchaToken: "",
     },
   });
 
@@ -81,8 +75,6 @@ export default function ResumeDownloadForm() {
         !accessResult.success ||
         accessResult.data.success !== true
       ) {
-        form.setValue("hCaptchaToken", "", { shouldValidate: true });
-        setCaptchaVersion((version) => version + 1);
         toast.error(
           accessResponse.status === 429
             ? "Too many requests. Please wait 15 minutes before trying again."
@@ -97,7 +89,6 @@ export default function ResumeDownloadForm() {
       accessSent = true;
       setIsOpen(false);
       form.reset();
-      setCaptchaVersion((version) => version + 1);
       toast.success(
         "Access links sent. Check your inbox or spam folder for the links; they expire in 24 hours.",
       );
@@ -196,39 +187,6 @@ export default function ResumeDownloadForm() {
               tabIndex={-1}
               aria-hidden="true"
               className="absolute left-[-10000px] h-px w-px overflow-hidden"
-            />
-            <FormField
-              control={form.control}
-              name="hCaptchaToken"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Verify that you're human</FormLabel>
-                  <HCaptcha
-                    key={captchaVersion}
-                    sitekey={HCAPTCHA_SITE_KEY}
-                    reCaptchaCompat={false}
-                    onVerify={(token) =>
-                      form.setValue("hCaptchaToken", token, {
-                        shouldValidate: true,
-                      })
-                    }
-                    onExpire={() =>
-                      form.setValue("hCaptchaToken", "", {
-                        shouldValidate: true,
-                      })
-                    }
-                    onError={() => {
-                      form.setValue("hCaptchaToken", "", {
-                        shouldValidate: true,
-                      });
-                      toast.error(
-                        "hCaptcha could not load. Please refresh and try again.",
-                      );
-                    }}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
             />
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? (
