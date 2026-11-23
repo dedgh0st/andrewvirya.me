@@ -29,6 +29,8 @@ export async function generateMetadata({
     title: entry
       ? `${entry.title} Demo | Security Labs`
       : "Lab Demo | andrewvirya.me",
+    openGraph: { images: [] },
+    twitter: { images: [] },
     robots: { index: false, follow: false },
   };
 }
