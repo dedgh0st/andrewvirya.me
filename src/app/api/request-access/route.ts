@@ -143,8 +143,17 @@ export async function POST(request: Request) {
 
   const verification = web3FormsResponseSchema.safeParse(web3FormsResult);
   if (!verification.success || !verification.data.success) {
+    console.error(
+      "Web3Forms rejected the hCaptcha response.",
+      verification.success
+        ? (verification.data.message ?? "No error message was provided.")
+        : "Web3Forms returned an invalid response.",
+    );
     return Response.json(
-      { error: "hCaptcha verification failed. Please complete the challenge." },
+      {
+        error:
+          "Web3Forms rejected the hCaptcha response. Check that hCaptcha is enabled for this form in your Web3Forms dashboard, then try again.",
+      },
       { status: 400 },
     );
   }
