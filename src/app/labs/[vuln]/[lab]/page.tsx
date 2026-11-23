@@ -69,7 +69,10 @@ async function LabBriefingContent({ params }: LabPageProps) {
     notFound();
   }
 
-  const demoHref = `/labs/${entry.vulnSlug}/${entry.labSlug}/demo`;
+  const demoHref =
+    entry.vulnSlug === "clickjacking"
+      ? "https://clickjacking-poc.andrewvirya.me"
+      : `/labs/${entry.vulnSlug}/${entry.labSlug}/demo`;
 
   return (
     <article className="grid gap-8">
@@ -90,7 +93,9 @@ async function LabBriefingContent({ params }: LabPageProps) {
               Access Lab
             </span>
             <span className="text-sm text-muted-foreground">
-              Open the safe simulation
+              {entry.vulnSlug === "clickjacking"
+                ? "Open the hosted lab"
+                : "Open the safe simulation"}
             </span>
           </span>
           <ArrowRightIcon

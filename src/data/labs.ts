@@ -11,6 +11,34 @@ export interface LabDefinition {
 
 export const LABS = [
   {
+    vulnSlug: "clickjacking",
+    labSlug: "clickjacking-poc",
+    title: "Clickjacking: UI Redressing",
+    category: "Browser Security / UI Redressing",
+    summary:
+      "Clickjacking places a framed interface beneath decoy content so a visible click can activate a different control. The hosted lab demonstrates browser framing defenses with a mock account action.",
+    howItWorks: [
+      "A page embeds another interface in a frame and places it over a decoy control.",
+      "A visitor clicks what appears to be the decoy, while the frame receives the input.",
+      "The hosted lab presents a mock account action protected by browser framing policy; it stores no account data.",
+    ],
+    mitigation: [
+      "Send Content-Security-Policy with a restrictive frame-ancestors directive, such as 'none' or an explicit trusted-origin allowlist.",
+      "Use X-Frame-Options: DENY or SAMEORIGIN as a compatibility fallback for older browsers.",
+      "Set authentication cookies with an appropriate SameSite policy as defense in depth; do not rely on it as the framing control.",
+    ],
+    references: [
+      {
+        title: "PortSwigger Web Security Academy: Clickjacking",
+        url: "https://portswigger.net/web-security/clickjacking",
+      },
+      {
+        title: "OWASP: Clickjacking",
+        url: "https://community.owasp.org/attacks/Clickjacking",
+      },
+    ],
+  },
+  {
     vulnSlug: "clickfix",
     labSlug: "captcha-verification",
     title: "ClickFix: Fake Human Verification (Clipboard-to-Shell)",
