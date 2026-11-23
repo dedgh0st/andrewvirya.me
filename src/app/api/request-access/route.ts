@@ -152,7 +152,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         error:
-          "Web3Forms rejected the hCaptcha response. Check that hCaptcha is enabled for this form in your Web3Forms dashboard, then try again.",
+          "Web3Forms rejected the hCaptcha response. Enable hCaptcha for this form in the Web3Forms dashboard or try again.",
       },
       { status: 400 },
     );
