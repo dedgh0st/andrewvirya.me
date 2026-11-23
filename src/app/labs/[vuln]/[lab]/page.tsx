@@ -39,20 +39,6 @@ export default function LabBriefingPage({ params }: LabPageProps) {
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-8 sm:px-16 sm:py-12">
         <LabsHeader />
 
-        <aside
-          aria-label="Lab safety disclaimer"
-          className="border border-red-500/40 bg-red-500/10 p-4 text-sm leading-6"
-        >
-          <p className="font-mono font-semibold text-red-500">
-            Safe scope boundary
-          </p>
-          <p className="mt-1 text-muted-foreground">
-            This is a benign educational simulation for security awareness and
-            defensive research. The site does not execute commands or establish
-            remote access.
-          </p>
-        </aside>
-
         <Suspense fallback={<LabBriefingFallback />}>
           <LabBriefingContent params={params} />
         </Suspense>
@@ -76,36 +62,15 @@ async function LabBriefingContent({ params }: LabPageProps) {
 
   return (
     <article className="grid gap-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <Link
-          href="/labs"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
-        >
-          <ArrowLeftIcon aria-hidden="true" className="size-4" />
-          Back to Labs
-        </Link>
-        <Link
-          href={demoHref}
-          className="group flex min-h-20 w-full items-center justify-between gap-6 border border-red-500/40 bg-background/80 px-5 py-4 text-left transition-colors hover:border-red-500 hover:bg-red-500/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500 sm:w-auto sm:min-w-64"
-        >
-          <span className="grid gap-1">
-            <span className="font-heading text-base font-semibold text-red-500">
-              Access Lab
-            </span>
-            <span className="text-sm text-muted-foreground">
-              {entry.vulnSlug === "clickjacking"
-                ? "Open the hosted lab"
-                : "Open the safe simulation"}
-            </span>
-          </span>
-          <ArrowRightIcon
-            aria-hidden="true"
-            className="size-5 shrink-0 text-red-500 motion-safe:transition-transform motion-safe:group-hover:translate-x-1"
-          />
-        </Link>
-      </div>
+      <Link
+        href="/labs"
+        className="inline-flex w-fit items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
+      >
+        <ArrowLeftIcon aria-hidden="true" className="size-4" />
+        Back to Labs
+      </Link>
 
-      <header className="grid gap-3">
+      <header className="grid gap-3 border-b border-border pb-8">
         <p className="font-mono text-xs uppercase tracking-widest text-red-500">
           {entry.vulnSlug} / {entry.category}
         </p>
@@ -115,7 +80,31 @@ async function LabBriefingContent({ params }: LabPageProps) {
         <p className="text-sm leading-6 text-muted-foreground">
           {entry.summary}
         </p>
+        <Link
+          href={demoHref}
+          className="group inline-flex min-h-12 w-fit items-center gap-4 border border-red-500/70 px-5 font-mono text-sm text-red-500 transition-colors hover:border-red-500 hover:bg-red-500/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500"
+        >
+          Open demo
+          <ArrowRightIcon
+            aria-hidden="true"
+            className="size-4 transition-transform group-hover:translate-x-1"
+          />
+        </Link>
       </header>
+
+      <aside
+        aria-label="Lab safety disclaimer"
+        className="border border-red-500/40 bg-red-500/10 p-4 text-sm leading-6"
+      >
+        <p className="font-mono font-semibold text-red-500">
+          Safe scope boundary
+        </p>
+        <p className="mt-1 text-muted-foreground">
+          This is a benign educational simulation for security awareness and
+          defensive research. The site does not execute commands or establish
+          remote access.
+        </p>
+      </aside>
 
       <section aria-labelledby="how-it-works">
         <h2 id="how-it-works" className="font-heading text-xl font-semibold">
