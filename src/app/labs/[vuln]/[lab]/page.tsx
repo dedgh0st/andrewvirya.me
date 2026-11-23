@@ -55,10 +55,7 @@ async function LabBriefingContent({ params }: LabPageProps) {
     notFound();
   }
 
-  const demoHref =
-    entry.vulnSlug === "clickjacking"
-      ? "https://clickjacking-poc.andrewvirya.me"
-      : `/labs/${entry.vulnSlug}/${entry.labSlug}/demo`;
+  const demoHref = `/labs/${entry.vulnSlug}/${entry.labSlug}/demo`;
 
   return (
     <article className="grid gap-8">

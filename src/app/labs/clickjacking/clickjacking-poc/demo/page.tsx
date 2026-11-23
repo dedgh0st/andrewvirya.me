@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import ClickjackingDemo from "./clickjacking-demo";
 
 export default function ClickjackingDemoPage() {
-  redirect("https://clickjacking-poc.andrewvirya.me");
+  return <ClickjackingDemo />;
 }
