@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
@@ -73,7 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteIntegrations />
         <PageTransition>{children}</PageTransition>
         <Analytics />
-        <GoogleAnalytics gaId="G-B9F3F8CKK" />
+        <GoogleTagManager gtmId="GTM-TLLMKK2P" />
         <Toaster position="top-right" richColors />
       </body>
     </html>
